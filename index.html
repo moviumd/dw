@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>APK Downloads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Lightweight Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --purple1: #8b5cf6;
+      --purple2: #6d28d9;
+      --purple3: #a78bfa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% -10%, rgba(139,92,246,0.20), transparent 55%),
+        radial-gradient(700px 450px at 15% 20%, rgba(167,139,250,0.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    .header {
+      padding: 18px 16px 16px;
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0 0 6px;
+      letter-spacing: 0.2px;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+    }
+
+    p {
+      font-size: 13px;
+      opacity: 0.9;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 14px 0 16px;
+      border-radius: 999px;
+    }
+
+    .apk-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 460px;
+      margin: 10px auto;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--purple1), var(--purple2));
+      box-shadow:
+        0 12px 28px rgba(109,40,217,0.28),
+        0 6px 14px rgba(0,0,0,0.35);
+      transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+      will-change: transform;
+    }
+
+    .apk-button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 16px 34px rgba(109,40,217,0.33),
+        0 8px 16px rgba(0,0,0,0.40);
+      opacity: 0.98;
+    }
+
+    .apk-button:active {
+      transform: translateY(0px) scale(0.99);
+      opacity: 0.96;
+    }
+
+    .apk-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .apk-emoji {
+      font-size: 18px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+    }
+
+    .apk-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .apk-name {
+      font-size: 15px;
+      letter-spacing: 0.1px;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+    }
+
+    .apk-sub {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .apk-right {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    .secondary:hover {
+      box-shadow: 0 14px 30px rgba(0,0,0,0.40);
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 18px;
+      line-height: 1.6;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .disclaimer-box {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .disclaimer-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .footer-hint {
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.50);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>APK Downloads ✨</h1>
+      <p>Select an app below to download and install it.</p>
+
+      <div class="divider"></div>
+
+      <!-- ZIP: put your zip in the repo root and name it All_APKs.zip (or change this href) -->
+     <a class="apk-button secondary" href="apps.zip" download>
+        <span class="apk-left">
+          <span class="apk-emoji">📦</span>
+          <span class="apk-title">
+            <span class="apk-name">Download All</span>
+            <span class="apk-sub">One zip with everything</span>
+          </span>
+        </span>
+        <span class="apk-right">ZIP ⬇️</span>
+      </a>
+
+      <div class="footer-hint">Tip: Save this page link for easy installs.</div>
+    </div>
+
+    <!-- Your existing buttons (same filenames as you said) -->
+    <a class="apk-button" href="app1.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">📱</span>
+        <span class="apk-title">
+          <span class="apk-name">Download App 1</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <a class="apk-button" href="app2.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">📱</span>
+        <span class="apk-title">
+          <span class="apk-name">Download App 2</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <a class="apk-button" href="app3.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">📱</span>
+        <span class="apk-title">
+          <span class="apk-name">Download App 3</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <a class="apk-button" href="app4.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">📱</span>
+        <span class="apk-title">
+          <span class="apk-name">Download App 4</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <a class="apk-button" href="app5.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">🧩</span>
+        <span class="apk-title">
+          <span class="apk-name">Backup App 3</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <a class="apk-button" href="app6.apk" download>
+      <span class="apk-left">
+        <span class="apk-emoji">🛡️</span>
+        <span class="apk-title">
+          <span class="apk-name">VPN</span>
+          <span class="apk-sub">APK file</span>
+        </span>
+      </span>
+      <span class="apk-right">Download ⬇️</span>
+    </a>
+
+    <div class="note">
+      Tip: In Downloader, enter this page link in the browser bar, open it,
+      then click any button. Android may ask you to allow installs from
+      unknown sources and then confirm the install.
+    </div>
+
+    <!-- Disclaimer text unchanged -->
+    <div class="disclaimer-box">
+      <div class="disclaimer-title">Disclaimer</div>
+      <div>
+        These applications are provided as-is for personal use only. We do not
+        host, stream, or distribute any copyrighted content. The apps
+        themselves do not contain any media, playlists, channels, movies, TV
+        shows, or copyrighted files.
+        <br /><br />
+        Any content that users choose to access through these apps is entirely
+        their own responsibility. Users are solely responsible for ensuring
+        that any streams, links, playlists, or services they add comply with
+        all applicable local laws, copyright regulations, and terms of use.
+        <br /><br />
+        We do not endorse, facilitate, promote, or encourage access to
+        copyrighted content. By downloading or using these applications, you
+        agree that you are responsible for your own actions and usage.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
