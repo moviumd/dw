@@ -21,6 +21,8 @@
       --purple1: #8b5cf6;
       --purple2: #6d28d9;
       --purple3: #a78bfa;
+      --green1: #22c55e;
+      --green2: #16a34a;
     }
 
     * { box-sizing: border-box; }
@@ -96,6 +98,7 @@
         0 6px 14px rgba(0,0,0,0.35);
       transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
       will-change: transform;
+      cursor: pointer;
     }
 
     .apk-button:hover {
@@ -152,6 +155,20 @@
       text-shadow: 0 1px 10px rgba(0,0,0,0.35);
     }
 
+    /* Top “Download All” style */
+    .download-all {
+      background: linear-gradient(135deg, var(--green1), var(--green2));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 12px 28px rgba(34,197,94,0.20),
+        0 6px 14px rgba(0,0,0,0.35);
+    }
+    .download-all:hover {
+      box-shadow:
+        0 16px 34px rgba(34,197,94,0.26),
+        0 8px 16px rgba(0,0,0,0.40);
+    }
+
     .secondary {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
@@ -174,6 +191,7 @@
       border-radius: 12px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
     }
 
     .disclaimer-box {
@@ -201,6 +219,67 @@
       color: rgba(255,255,255,0.50);
     }
   </style>
+
+  <script>
+    // --- CONFIG: your 6 APK files (same as your existing links) ---
+    const APK_FILES = [
+      { url: "app1.apk", name: "App 1" },
+      { url: "app2.apk", name: "App 2" },
+      { url: "app3.apk", name: "App 3" },
+      { url: "app4.apk", name: "App 4" },
+      { url: "app5.apk", name: "Backup App 3" },
+      { url: "app6.apk", name: "VPN" }
+    ];
+
+    // Create a download via a temporary <a> click.
+    function triggerDownload(url) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = ""; // hint only
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    // Try to download all files "at the same time".
+    // Realistically, browsers may still block multi-downloads without approval.
+    function downloadAllAtOnce() {
+      for (const f of APK_FILES) {
+        triggerDownload(f.url);
+      }
+    }
+
+    // Sequential fallback (often more reliable on some browsers)
+    async function downloadAllSequential(delayMs = 900) {
+      for (const f of APK_FILES) {
+        triggerDownload(f.url);
+        await new Promise(r => setTimeout(r, delayMs));
+      }
+    }
+
+    // Choose strategy: "parallel" or "sequential"
+    async function downloadAll(strategy = "parallel") {
+      // Some browsers block parallel bursts; if you notice issues, switch to sequential.
+      if (strategy === "sequential") {
+        await downloadAllSequential(900);
+      } else {
+        downloadAllAtOnce();
+      }
+    }
+
+    // Auto-download if URL includes ?autodl=1
+    // NOTE: This may be blocked unless the user interacts / allows multiple downloads.
+    window.addEventListener("load", () => {
+      const params = new URLSearchParams(window.location.search);
+      const autodl = params.get("autodl");
+
+      if (autodl === "1") {
+        // Try parallel first; if your users report blocking, change to "sequential"
+        downloadAll("parallel");
+      }
+    });
+  </script>
 </head>
 
 <body>
@@ -211,23 +290,52 @@
 
       <div class="divider"></div>
 
-      <!-- ZIP: put your zip in the repo root and name it All_APKs.zip (or change this href) -->
-     <a class="apk-button secondary" href="https://github.com/moviumd/dw/releases/latest/download/apps.zip"
- download>
+      <!-- NEW: Download all (6 separate APKs, not zipped) -->
+      <button class="apk-button download-all" id="downloadAllBtn" type="button">
         <span class="apk-left">
-          <span class="apk-emoji">📦</span>
+          <span class="apk-emoji">⬇️</span>
           <span class="apk-title">
-            <span class="apk-name">Download All</span>
-            <span class="apk-sub">One zip with everything</span>
+            <span class="apk-name">Download All (6 APKs)</span>
+            <span class="apk-sub">Starts 6 separate downloads</span>
           </span>
         </span>
-        <span class="apk-right">ZIP ⬇️</span>
+        <span class="apk-right">ALL ⬇️</span>
+      </button>
+
+      <div class="footer-hint">
+        Tip: Browsers may ask “Allow multiple downloads?” — choose Allow.
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Optional: Auto-download link helper (shows the exact URL pattern) -->
+      <a class="apk-button secondary" id="autoLink" href="#" style="text-decoration:none;">
+        <span class="apk-left">
+          <span class="apk-emoji">🔗</span>
+          <span class="apk-title">
+            <span class="apk-name">Auto-download link</span>
+            <span class="apk-sub">Opens page and attempts auto-download</span>
+          </span>
+        </span>
+        <span class="apk-right">LINK ↗️</span>
       </a>
 
-      <div class="footer-hint">Tip: Save this page link for easy installs.</div>
+      <script>
+        // Hook up the main button
+        document.getElementById("downloadAllBtn").addEventListener("click", () => {
+          // Change "parallel" to "sequential" if you see blocking issues.
+          downloadAll("parallel");
+        });
+
+        // Build the autodownload link dynamically based on current URL
+        const base = window.location.origin + window.location.pathname;
+        const autoUrl = base + "?autodl=1";
+        const autoLinkEl = document.getElementById("autoLink");
+        autoLinkEl.href = autoUrl;
+      </script>
     </div>
 
-    <!-- Your existing buttons (same filenames as you said) -->
+    <!-- Individual buttons unchanged -->
     <a class="apk-button" href="app1.apk" download>
       <span class="apk-left">
         <span class="apk-emoji">📱</span>
@@ -295,9 +403,10 @@
     </a>
 
     <div class="note">
-      Tip: In Downloader, enter this page link in the browser bar, open it,
-      then click any button. Android may ask you to allow installs from
-      unknown sources and then confirm the install.
+      <b>One-click download-all:</b> use the green button at the top.<br><br>
+      <b>Auto-download link:</b> open the “Auto-download link” button (it adds <code>?autodl=1</code>).<br><br>
+      <b>Heads up:</b> Some browsers will block multiple downloads until you tap something or allow “multiple downloads”.
+      If that happens, open the page and tap “Download All (6 APKs)”.
     </div>
 
     <!-- Disclaimer text unchanged -->
