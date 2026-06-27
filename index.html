@@ -155,7 +155,6 @@
       text-shadow: 0 1px 10px rgba(0,0,0,0.35);
     }
 
-    /* Top “Download All” style */
     .download-all {
       background: linear-gradient(135deg, var(--green1), var(--green2));
       border: 1px solid rgba(255,255,255,0.14);
@@ -163,6 +162,7 @@
         0 12px 28px rgba(34,197,94,0.20),
         0 6px 14px rgba(0,0,0,0.35);
     }
+
     .download-all:hover {
       box-shadow:
         0 16px 34px rgba(34,197,94,0.26),
@@ -177,6 +177,21 @@
 
     .secondary:hover {
       box-shadow: 0 14px 30px rgba(0,0,0,0.40);
+    }
+
+    .purple-highlight {
+      background: rgba(15,15,20,0.95);
+      border: 2px solid #b266ff;
+      box-shadow:
+        0 0 0 1px rgba(178,102,255,0.18),
+        0 0 20px rgba(178,102,255,0.42),
+        0 10px 24px rgba(0,0,0,0.38);
+    }
+
+    .purple-highlight:hover {
+      box-shadow:
+        0 0 26px rgba(178,102,255,0.60),
+        0 14px 30px rgba(0,0,0,0.42);
     }
 
     .note {
@@ -221,36 +236,32 @@
   </style>
 
   <script>
-    // --- CONFIG: your 6 APK files (same as your existing links) ---
     const APK_FILES = [
       { url: "app1.apk", name: "App 1" },
       { url: "app2.apk", name: "App 2" },
       { url: "app3.apk", name: "App 3" },
       { url: "app4.apk", name: "App 4" },
       { url: "app5.apk", name: "Backup App 3" },
-      { url: "app6.apk", name: "VPN" }
+      { url: "app6.apk", name: "VPN" },
+      { url: "app7.apk", name: "NEW Backup Main App" }
     ];
 
-    // Create a download via a temporary <a> click.
     function triggerDownload(url) {
       const a = document.createElement("a");
       a.href = url;
-      a.download = ""; // hint only
+      a.download = "";
       a.rel = "noopener";
       document.body.appendChild(a);
       a.click();
       a.remove();
     }
 
-    // Try to download all files "at the same time".
-    // Realistically, browsers may still block multi-downloads without approval.
     function downloadAllAtOnce() {
       for (const f of APK_FILES) {
         triggerDownload(f.url);
       }
     }
 
-    // Sequential fallback (often more reliable on some browsers)
     async function downloadAllSequential(delayMs = 900) {
       for (const f of APK_FILES) {
         triggerDownload(f.url);
@@ -258,9 +269,7 @@
       }
     }
 
-    // Choose strategy: "parallel" or "sequential"
     async function downloadAll(strategy = "parallel") {
-      // Some browsers block parallel bursts; if you notice issues, switch to sequential.
       if (strategy === "sequential") {
         await downloadAllSequential(900);
       } else {
@@ -268,14 +277,11 @@
       }
     }
 
-    // Auto-download if URL includes ?autodl=1
-    // NOTE: This may be blocked unless the user interacts / allows multiple downloads.
     window.addEventListener("load", () => {
       const params = new URLSearchParams(window.location.search);
       const autodl = params.get("autodl");
 
       if (autodl === "1") {
-        // Try parallel first; if your users report blocking, change to "sequential"
         downloadAll("parallel");
       }
     });
@@ -290,17 +296,27 @@
 
       <div class="divider"></div>
 
-      <!-- NEW: Download all (6 separate APKs, not zipped) -->
       <button class="apk-button download-all" id="downloadAllBtn" type="button">
         <span class="apk-left">
           <span class="apk-emoji">⬇️</span>
           <span class="apk-title">
-            <span class="apk-name">Download All (6 APKs)</span>
-            <span class="apk-sub">Starts 6 separate downloads</span>
+            <span class="apk-name">Download All (7 APKs)</span>
+            <span class="apk-sub">Starts 7 separate downloads</span>
           </span>
         </span>
         <span class="apk-right">ALL ⬇️</span>
       </button>
+
+      <a class="apk-button secondary purple-highlight" href="app7.apk" download>
+        <span class="apk-left">
+          <span class="apk-emoji">🚀</span>
+          <span class="apk-title">
+            <span class="apk-name">NEW Backup Main App (Use This)</span>
+            <span class="apk-sub">Latest recommended backup APK</span>
+          </span>
+        </span>
+        <span class="apk-right">NEW ✨</span>
+      </a>
 
       <div class="footer-hint">
         Tip: Browsers may ask “Allow multiple downloads?” — choose Allow.
@@ -308,7 +324,6 @@
 
       <div class="divider"></div>
 
-      <!-- Optional: Auto-download link helper (shows the exact URL pattern) -->
       <a class="apk-button secondary" id="autoLink" href="#" style="text-decoration:none;">
         <span class="apk-left">
           <span class="apk-emoji">🔗</span>
@@ -321,13 +336,10 @@
       </a>
 
       <script>
-        // Hook up the main button
         document.getElementById("downloadAllBtn").addEventListener("click", () => {
-          // Change "parallel" to "sequential" if you see blocking issues.
           downloadAll("parallel");
         });
 
-        // Build the autodownload link dynamically based on current URL
         const base = window.location.origin + window.location.pathname;
         const autoUrl = base + "?autodl=1";
         const autoLinkEl = document.getElementById("autoLink");
@@ -335,7 +347,6 @@
       </script>
     </div>
 
-    <!-- Individual buttons unchanged -->
     <a class="apk-button" href="app1.apk" download>
       <span class="apk-left">
         <span class="apk-emoji">📱</span>
@@ -406,10 +417,9 @@
       <b>One-click download-all:</b> use the green button at the top.<br><br>
       <b>Auto-download link:</b> open the “Auto-download link” button (it adds <code>?autodl=1</code>).<br><br>
       <b>Heads up:</b> Some browsers will block multiple downloads until you tap something or allow “multiple downloads”.
-      If that happens, open the page and tap “Download All (6 APKs)”.
+      If that happens, open the page and tap “Download All (7 APKs)”.
     </div>
 
-    <!-- Disclaimer text unchanged -->
     <div class="disclaimer-box">
       <div class="disclaimer-title">Disclaimer</div>
       <div>
