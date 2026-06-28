@@ -78,6 +78,7 @@
     }
 
     .apk-button {
+      font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -266,16 +267,15 @@
       { url: "app2.apk", name: "App 2" },
       { url: "app3.apk", name: "App 3" },
       { url: "app4.apk", name: "App 4" },
-      { url: "app5.apk", name: "Backup App 3" },
       { url: "app6.apk", name: "VPN" },
-      { url: "app7.apk", name: "NEW Backup Main App" },
+      { url: "app7.apk", name: "NEW Main Backup App" },
       { url: "bee.apk", name: "BeeTV" },
-      { url: "player.apk", name: "Required Player" }
+      { url: "player.apk", name: "Bear Player" }
     ];
 
     const BEE_FILES = [
       { url: "bee.apk", name: "BeeTV" },
-      { url: "player.apk", name: "Required Player" }
+      { url: "player.apk", name: "Bear Player" }
     ];
 
     function triggerDownload(url) {
@@ -338,8 +338,8 @@
         <span class="apk-left">
           <span class="apk-emoji">⬇️</span>
           <span class="apk-title">
-            <span class="apk-name">Download All (9 APKs)</span>
-            <span class="apk-sub">Starts 9 separate downloads</span>
+            <span class="apk-name">Download All (8 APKs)</span>
+            <span class="apk-sub">Starts 8 separate downloads</span>
           </span>
         </span>
         <span class="apk-right">ALL ⬇️</span>
@@ -349,7 +349,7 @@
         <span class="apk-left">
           <span class="apk-emoji">🚀</span>
           <span class="apk-title">
-            <span class="apk-name">NEW Backup Main App (Use This)</span>
+            <span class="apk-name">NEW Main Backup App (Use This)</span>
             <span class="apk-sub">Latest recommended backup APK</span>
           </span>
         </span>
@@ -360,8 +360,8 @@
         <span class="apk-left">
           <span class="apk-emoji">🐝</span>
           <span class="apk-title">
-            <span class="apk-name">BeeTV App + Required Player</span>
-            <span class="apk-sub">Install both BeeTV and Player for it to work properly</span>
+            <span class="apk-name">BeeTV + Bear Player</span>
+            <span class="apk-sub">Install both BeeTV and Bear Player for it to work properly</span>
           </span>
         </span>
         <span class="apk-right">2 APKs ⬇️</span>
@@ -444,17 +444,6 @@
       <span class="apk-right">Download ⬇️</span>
     </a>
 
-    <a class="apk-button" href="app5.apk" download>
-      <span class="apk-left">
-        <span class="apk-emoji">🧩</span>
-        <span class="apk-title">
-          <span class="apk-name">Backup App 3</span>
-          <span class="apk-sub">APK file</span>
-        </span>
-      </span>
-      <span class="apk-right">Download ⬇️</span>
-    </a>
-
     <a class="apk-button" href="app6.apk" download>
       <span class="apk-left">
         <span class="apk-emoji">🛡️</span>
@@ -468,10 +457,10 @@
 
     <div class="note">
       <b>One-click download-all:</b> use the green button at the top.<br><br>
-      <b>BeeTV button:</b> downloads both <code>bee.apk</code> and <code>player.apk</code>. Install both for BeeTV to work properly.<br><br>
+      <b>BeeTV button:</b> downloads both <code>bee.apk</code> and <code>player.apk</code>. Install both BeeTV and Bear Player for it to work properly.<br><br>
       <b>Auto-download link:</b> open the “Auto-download link” button (it adds <code>?autodl=1</code>).<br><br>
       <b>Heads up:</b> Some browsers will block multiple downloads until you tap something or allow “multiple downloads”.
-      If that happens, open the page and tap “Download All (9 APKs)”.
+      If that happens, open the page and tap “Download All (8 APKs)”.
     </div>
 
     <div class="disclaimer-box">
