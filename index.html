@@ -295,9 +295,8 @@
     }
 
     function downloadBeeBundle() {
-      for (const f of BEE_FILES) {
-        triggerDownload(f.url);
-      }
+      triggerDownload("bee.apk");
+      setTimeout(() => triggerDownload("player.apk"), 150);
     }
 
     async function downloadAllSequential(delayMs = 900) {
