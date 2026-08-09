@@ -17,6 +17,7 @@
       --card-border: rgba(255,255,255,0.10);
       --text: rgba(255,255,255,0.94);
       --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.55);
       --purple1: #8b5cf6;
       --purple2: #6d28d9;
       --purple3: #a78bfa;
@@ -40,16 +41,14 @@
         radial-gradient(700px 450px at 15% 20%, rgba(167,139,250,0.10), transparent 60%),
         var(--bg);
       color:var(--text);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:24px 16px;
+      padding:24px 16px 42px;
       text-align:center;
     }
 
     .container{
       width:100%;
       max-width:560px;
+      margin:0 auto;
     }
 
     .card{
@@ -203,13 +202,6 @@
         0 10px 24px rgba(0,0,0,0.38);
     }
 
-    .footer{
-      margin-top:18px;
-      font-size:11.5px;
-      line-height:1.6;
-      color:rgba(255,255,255,0.58);
-    }
-
     .support-note{
       margin-top:18px;
       font-size:12px;
@@ -217,9 +209,35 @@
       font-weight:500;
     }
 
+    .footer{
+      margin-top:18px;
+      font-size:11.5px;
+      line-height:1.6;
+      color:rgba(255,255,255,0.58);
+    }
+
+    .disclaimer-box{
+      margin-top:22px;
+      padding:14px 16px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      font-size:11px;
+      line-height:1.58;
+      color:rgba(255,255,255,0.82);
+    }
+
+    .disclaimer-title{
+      font-weight:700;
+      margin-bottom:7px;
+      font-size:12px;
+      color:rgba(255,255,255,0.94);
+    }
+
     @media (max-width:420px){
       body{
-        padding:14px 12px;
+        padding:14px 12px 28px;
       }
 
       .card{
@@ -236,7 +254,7 @@
 
       .action{
         min-height:70px;
-        padding:13px 13px;
+        padding:13px;
       }
 
       .action-name{
@@ -245,6 +263,11 @@
 
       .action-sub{
         font-size:10.8px;
+      }
+
+      .disclaimer-box{
+        font-size:10.5px;
+        line-height:1.55;
       }
     }
   </style>
@@ -289,7 +312,12 @@
         <span class="arrow">→</span>
       </a>
 
-      <a class="action shop" href="https://movium.co" target="_blank" rel="noopener">
+      <a
+        class="action shop"
+        href="https://movium.co/products/movium-one"
+        target="_blank"
+        rel="noopener"
+      >
         <span class="action-left">
           <span class="icon">🏠</span>
           <span class="action-title">
@@ -304,6 +332,29 @@
 
       <div class="footer">
         Keep this page bookmarked for quick access to your guide and support.
+      </div>
+
+      <div class="disclaimer-box">
+        <div class="disclaimer-title">Disclaimer</div>
+
+        These applications are provided as-is for personal use only. Movium does not host,
+        stream, upload, store, or distribute movies, TV shows, live channels, playlists,
+        or other copyrighted media through these applications.
+        <br><br>
+
+        Third-party applications may display links, sources, channels, playlists, or services
+        provided by independent third parties. Availability and functionality may change at any time
+        and are outside of Movium's control.
+        <br><br>
+
+        Users are responsible for how they choose to use third-party applications and for ensuring
+        that any streams, links, playlists, accounts, or services they access comply with applicable
+        local laws, copyright requirements, and the terms of the applicable service.
+        <br><br>
+
+        Movium does not endorse, control, facilitate, or encourage unauthorized access to copyrighted
+        material. References to applications or features on this page and in the Quick Start Guide are
+        provided only to explain device setup, navigation, and general software functionality.
       </div>
     </section>
   </main>
