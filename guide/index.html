@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <title>Movium Support</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.94);
+      --muted: rgba(255,255,255,0.72);
+      --purple1: #8b5cf6;
+      --purple2: #6d28d9;
+      --purple3: #a78bfa;
+      --green1: #22c55e;
+      --green2: #16a34a;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,body{
+      min-height:100%;
+    }
+
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% -10%, rgba(139,92,246,0.20), transparent 55%),
+        radial-gradient(700px 450px at 15% 20%, rgba(167,139,250,0.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px 16px;
+      text-align:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:560px;
+    }
+
+    .card{
+      padding:28px 18px 24px;
+      border-radius:18px;
+      background:var(--card);
+      border:1px solid var(--card-border);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 14px;
+      margin-bottom:16px;
+      border-radius:999px;
+      border:1px solid rgba(167,139,250,0.32);
+      background:rgba(139,92,246,0.10);
+      color:var(--purple3);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:1.4px;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:28px;
+      line-height:1.15;
+      font-weight:700;
+      letter-spacing:-0.4px;
+      text-shadow:0 1px 10px rgba(0,0,0,0.35);
+    }
+
+    .subtitle{
+      margin:0 auto;
+      max-width:430px;
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .divider{
+      height:1px;
+      margin:20px 0;
+      background:rgba(255,255,255,0.08);
+      border-radius:999px;
+    }
+
+    .action{
+      width:100%;
+      max-width:460px;
+      min-height:72px;
+      margin:12px auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      text-decoration:none;
+      color:white;
+      background:linear-gradient(135deg,var(--purple1),var(--purple2));
+      box-shadow:
+        0 12px 28px rgba(109,40,217,0.28),
+        0 6px 14px rgba(0,0,0,0.35);
+      transition:transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+    }
+
+    .action:hover{
+      transform:translateY(-1px);
+      box-shadow:
+        0 16px 34px rgba(109,40,217,0.33),
+        0 8px 16px rgba(0,0,0,0.40);
+    }
+
+    .action:active{
+      transform:scale(0.99);
+      opacity:0.96;
+    }
+
+    .action-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-align:left;
+      min-width:0;
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:rgba(255,255,255,0.12);
+      font-size:21px;
+    }
+
+    .action-title{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+
+    .action-name{
+      font-size:15.5px;
+      line-height:1.2;
+      font-weight:700;
+    }
+
+    .action-sub{
+      margin-top:4px;
+      font-size:11.5px;
+      line-height:1.35;
+      font-weight:500;
+      color:rgba(255,255,255,0.76);
+    }
+
+    .arrow{
+      flex:0 0 auto;
+      font-size:18px;
+      font-weight:700;
+      opacity:0.9;
+    }
+
+    .support{
+      background:linear-gradient(135deg,var(--green1),var(--green2));
+      box-shadow:
+        0 12px 28px rgba(34,197,94,0.20),
+        0 6px 14px rgba(0,0,0,0.35);
+    }
+
+    .support:hover{
+      box-shadow:
+        0 16px 34px rgba(34,197,94,0.26),
+        0 8px 16px rgba(0,0,0,0.40);
+    }
+
+    .shop{
+      background:rgba(255,255,255,0.06);
+      border:2px solid #b266ff;
+      box-shadow:
+        0 0 0 1px rgba(178,102,255,0.18),
+        0 0 20px rgba(178,102,255,0.38),
+        0 10px 24px rgba(0,0,0,0.38);
+    }
+
+    .footer{
+      margin-top:18px;
+      font-size:11.5px;
+      line-height:1.6;
+      color:rgba(255,255,255,0.58);
+    }
+
+    .support-note{
+      margin-top:18px;
+      font-size:12px;
+      color:rgba(255,255,255,0.72);
+      font-weight:500;
+    }
+
+    @media (max-width:420px){
+      body{
+        padding:14px 12px;
+      }
+
+      .card{
+        padding:24px 13px 21px;
+      }
+
+      h1{
+        font-size:25px;
+      }
+
+      .subtitle{
+        font-size:13px;
+      }
+
+      .action{
+        min-height:70px;
+        padding:13px 13px;
+      }
+
+      .action-name{
+        font-size:14px;
+      }
+
+      .action-sub{
+        font-size:10.8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="card">
+      <div class="brand">MOVIUM SUPPORT</div>
+
+      <h1>Welcome to Movium ✨</h1>
+      <p class="subtitle">
+        Everything you need to get started, get help, or order another Movium.
+      </p>
+
+      <div class="divider"></div>
+
+      <a class="action" href="./Movium-Quick-Start-Guide.pdf" target="_blank" rel="noopener">
+        <span class="action-left">
+          <span class="icon">📖</span>
+          <span class="action-title">
+            <span class="action-name">Quick Start Guide</span>
+            <span class="action-sub">Setup, apps, remote & troubleshooting</span>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a
+        class="action support"
+        href="https://wa.me/19293509463?text=Hi%21%20I%20need%20help%20with%20my%20Movium%20device."
+        target="_blank"
+        rel="noopener"
+      >
+        <span class="action-left">
+          <span class="icon">💬</span>
+          <span class="action-title">
+            <span class="action-name">Message Support</span>
+            <span class="action-sub">Open WhatsApp and start a support chat</span>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="action shop" href="https://movium.co" target="_blank" rel="noopener">
+        <span class="action-left">
+          <span class="icon">🏠</span>
+          <span class="action-title">
+            <span class="action-name">Order Another Movium</span>
+            <span class="action-sub">For another TV, friend, or family member</span>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <div class="support-note">✓ Lifetime Premium WhatsApp Support Included</div>
+
+      <div class="footer">
+        Keep this page bookmarked for quick access to your guide and support.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
